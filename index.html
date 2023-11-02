@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style type="text/css">
+            body {
+                margin:auto;
+                text-align: center;
+                background-color: #f5f5dc;
+            }
+
+            #main {
+                padding-top: 10px;
+                background-color:#d3d3d3;
+                width:400px;
+                margin: auto;
+                font-size: 30px;
+                border-style: outset;
+            }
+
+            #userAnswer {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Addition Test</h1>
+        <div id="main">
+        <p id="mathQuestion"></p>
+        <p>Your answer:</p><p><input type="text" id="userAnswer"></p>
+        <p><button id="myButton">Submit</button></p>
+        <p id="answerConfirm"></p>
+        <p id="userTime"></p>
+        <p id="yourScore"></p>
+        <p id="totalQuestions"></p>
+        <p id="timeQuestion"></p>
+
+    </div>
+       
+
+       
+       
+        
+        <script type="text/javascript">
+
+          var num1 = Math.floor(Math.random() * 100) + 1;
+           var num2 = Math.floor(Math.random() * 100) + 1;
+           var answer = num1 + num2;
+           var question = num1.toString() + " + " + num2.toString() + " = ";
+
+
+           document.getElementById("mathQuestion").innerHTML = question;
+           
+           
+           start = new Date().getTime();         
+                    
+           var score = 0;
+           var numQuestions = 0;
+        
+           var correct = "Correct";
+           var incorrect = "Incorrect"   
+
+           var input = document.getElementById("userAnswer");
+            input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                document.getElementById("myButton").click();
+            
+            }
+            });     
+           
+
+           document.getElementById("myButton").onclick = function () {
+
+            var uAnswer = document.getElementById("userAnswer").value;           
+              
+              
+                if (answer == uAnswer){
+                    
+                        document.getElementById("answerConfirm").innerHTML = correct;
+                        document.getElementById("userAnswer").value = "";
+                        end = new Date().getTime();
+                        timeTaken = (end - start)/1000;
+                        timeTaken = Math.round(timeTaken *10)/10;
+                        document.getElementById("userTime").innerHTML = "Your time: " + timeTaken + "s";
+                    
+                        score++;
+                        numQuestions++;
+                        document.getElementById("yourScore").innerHTML = "Your score: " + score;
+                        document.getElementById("totalQuestions").innerHTML = "Total Questions:  " + numQuestions;
+
+                        num1 = Math.floor(Math.random() * 100) + 1;
+                        num2 = Math.floor(Math.random() * 100) + 1;
+                        answer = num1 + num2;
+                        question = num1.toString() + " + " + num2.toString() + " = ";
+                        document.getElementById("mathQuestion").innerHTML = question;    
+                        rateQuestion = timeTaken/numQuestions;
+                        rateQuestion = Math.round(rateQuestion *10)/10;
+                    document.getElementById("timeQuestion").innerHTML = "Time per Question: " + rateQuestion;               
+
+                   } else {
+               
+                    document.getElementById("answerConfirm").innerHTML = incorrect;
+                document.getElementById("userAnswer").value = "";
+               
+                numQuestions++;
+                document.getElementById("yourScore").innerHTML = "Your score: " + score;
+                document.getElementById("totalQuestions").innerHTML = "Total Questions:  " + numQuestions;
+
+                 num1 = Math.floor(Math.random() * 100) + 1;
+                 num2 = Math.floor(Math.random() * 100) + 1;
+                 answer = num1 + num2;
+                 question = num1.toString() + " + " + num2.toString() + " = ";
+                 document.getElementById("mathQuestion").innerHTML = question;
+                 rateQuestion =timeTaken/numQuestions;
+                 rateQuestion = Math.round(rateQuestion *10)/10;
+                 
+
+                    document.getElementById("timeQuestion").innerHTML = "Time per Question: " + rateQuestion;
+                //console.log(uAnswer);
+
+
+                } 
+
+               
+
+            }
+
+       
+
+
+            
+
+            
+           
+
+
+           
+           
+         
+         
+
+          
+        </script>
+    </body>
+</html>
